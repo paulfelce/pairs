@@ -16,7 +16,7 @@ function(){
   }
   else //assume for now we haven't reclicked a shown card
   {
-      if($('#' +this_card).attr('princess') ==$('#' +flip1).attr('princess')){        
+      if(this_card!=flip1 && $('#' +this_card).attr('princess') ==$('#' +flip1).attr('princess')){          
         $('#' + this_card).removeClass('flip')  //simple way to stop re-clicking
         $('#' + flip1).removeClass('flip')  //simple way to stop re-clicking
         flip1=""        
