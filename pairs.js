@@ -12,6 +12,7 @@ var card8_state = 0;
 
 $('#js-flip-1').click(
 function(){
+  alert('clicked');
   switch(card1_state){
     case 0:
        $('#js-flip-1 .card').addClass('flipped');
