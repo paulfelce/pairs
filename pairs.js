@@ -1,111 +1,197 @@
-var BoxOpened = "";
-var ImgOpened = "";
-var Counter = 0;
-var ImgFound = 0;
+$(function(){
+  
+  function set(key, value) { localStorage.setItem(key, value); }
+  function get(key)        { return localStorage.getItem(key); }
+  function increase(el)    { set(el, parseInt( get(el) ) + 1); }
+  function decrease(el)    { set(el, parseInt( get(el) ) - 1); }
 
-var Source = "#boxcard";
+  var toTime = function(nr){
+    if(nr == '-:-') return nr;
+    else { var n = ' '+nr/1000+' '; return n.substr(0, n.length-1)+'s'; }
+  };
 
-var ImgSource = [
-  "http://img5.uploadhouse.com/fileuploads/17699/176992640c06707c66a5c0b08a2549c69745dc2c.png",
-  "http://img6.uploadhouse.com/fileuploads/17699/17699263b01721074bf094aa3bc695aa19c8d573.png",
-  "http://img6.uploadhouse.com/fileuploads/17699/17699262833250fa3063b708c41042005fda437d.png"//,
-  //"http://img9.uploadhouse.com/fileuploads/17699/176992615db99bb0fd652a2e6041388b2839a634.png",
-  //"http://img4.uploadhouse.com/fileuploads/17699/176992601ca0f28ba4a8f7b41f99ee026d7aaed8.png",
-  //"http://img3.uploadhouse.com/fileuploads/17699/17699259cb2d70c6882adc285ab8d519658b5dd7.png",
-  //"http://img2.uploadhouse.com/fileuploads/17699/1769925824ea93cbb77ba9e95c1a4cec7f89b80c.png",
-  //"http://img7.uploadhouse.com/fileuploads/17699/1769925708af4fb3c954b1d856da1f4d4dcd548a.png",
-  //"http://img9.uploadhouse.com/fileuploads/17699/176992568b759acd78f7cbe98b6e4a7baa90e717.png",
-  //"http://img9.uploadhouse.com/fileuploads/17699/176992554c2ca340cc2ea8c0606ecd320824756e.png"
-];
+  function updateStats(){
+    $('#stats').html('<div class="padded"><h2>Figures: <span>'+
+      '<b>'+get('flip_won')+'</b><i>Won</i>'+
+      '<b>'+get('flip_lost')+'</b><i>Lost</i>'+
+      '<b>'+get('flip_abandoned')+'</b><i>Abandoned</i></span></h2>'+
+      '<ul><li><b>Best Casual:</b> <span>'+toTime( get('flip_casual') )+'</span></li>'+
+      '<li><b>Best Medium:</b> <span>'+toTime( get('flip_medium') )+'</span></li>'+
+      '<li><b>Best Hard:</b> <span>'+toTime( get('flip_hard') )+'</span></li></ul>'+
+      '<ul><li><b>Total Flips:</b> <span>'+parseInt( ( parseInt(get('flip_matched')) + parseInt(get('flip_wrong')) ) * 2)+'</span></li>'+
+      '<li><b>Matched Flips:</b> <span>'+get('flip_matched')+'</span></li>'+
+      '<li><b>Wrong Flips:</b> <span>'+get('flip_wrong')+'</span></li></ul></div>');
+  };
 
-function RandomFunction(MaxValue, MinValue) {
-		return Math.round(Math.random() * (MaxValue - MinValue) + MinValue);
-	}
-	
-function ShuffleImages() {
-	var ImgAll = $(Source).children();
-	var ImgThis = $(Source + " div:first-child");
-	var ImgArr = new Array();
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+  };
 
-	for (var i = 0; i < ImgAll.length; i++) {
-		ImgArr[i] = $("#" + ImgThis.attr("id") + " img").attr("src");
-		ImgThis = ImgThis.next();
-	}
-	
-		ImgThis = $(Source + " div:first-child");
-	
-	for (var z = 0; z < ImgAll.length; z++) {
-	var RandomNumber = RandomFunction(0, ImgArr.length - 1);
+  function startScreen(text){
+    $('#g').removeAttr('class').empty();
+    $('.logo').fadeIn(250);
 
-		$("#" + ImgThis.attr("id") + " img").attr("src", ImgArr[RandomNumber]);
-		ImgArr.splice(RandomNumber, 1);
-		ImgThis = ImgThis.next();
-	}
-}
+    $('.c1').text(text.substring(0, 1));
+    $('.c2').text(text.substring(1, 2));
+    $('.c3').text(text.substring(2, 3));
+    $('.c4').text(text.substring(3, 4));
 
-function ResetGame() {
-	ShuffleImages();
-	$(Source + " div img").hide();
-	$(Source + " div").css("visibility", "visible");
-	Counter = 0;
-	$("#success").remove();
-	$("#counter").html("" + Counter);
-	BoxOpened = "";
-	ImgOpened = "";
-	ImgFound = 0;
-	return false;
-}
+    // If won game
+    if(text == 'nice'){
+      increase('flip_won');
+      decrease('flip_abandoned');
+    }
 
-function OpenCard() {
-	var id = $(this).attr("id");
+    // If lost game
+    else if(text == 'fail'){
+      increase('flip_lost');
+      decrease('flip_abandoned');
+    }
 
-	if ($("#" + id + " img").is(":hidden")) {
-		$(Source + " div").unbind("click", OpenCard);
-	
-		$("#" + id + " img").slideDown('fast');
+    // Update stats
+    updateStats();
+  };
 
-		if (ImgOpened == "") {
-			BoxOpened = id;
-			ImgOpened = $("#" + id + " img").attr("src");
-			setTimeout(function() {
-				$(Source + " div").bind("click", OpenCard)
-			}, 300);
-		} else {
-			CurrentOpened = $("#" + id + " img").attr("src");
-			if (ImgOpened != CurrentOpened) {
-				setTimeout(function() {
-					$("#" + id + " img").slideUp('fast');
-					$("#" + BoxOpened + " img").slideUp('fast');
-					BoxOpened = "";
-					ImgOpened = "";
-				}, 400);
-			} else {
-				$("#" + id + " img").parent().css("visibility", "hidden");
-				$("#" + BoxOpened + " img").parent().css("visibility", "hidden");
-				ImgFound++;
-				BoxOpened = "";
-				ImgOpened = "";
-			}
-			setTimeout(function() {
-				$(Source + " div").bind("click", OpenCard)
-			}, 400);
-		}
-		Counter++;
-		$("#counter").html("" + Counter);
+  /* LOAD GAME ACTIONS */
 
-		if (ImgFound == ImgSource.length) {
-			$("#counter").prepend('<span id="success">You Found All Pictues With </span>');
-		}
-	}
-}
+  // Init localStorage
+  if( !get('flip_won') && !get('flip_lost') && !get('flip_abandoned') ){
+    //Overall Game stats
+    set('flip_won', 0);
+    set('flip_lost', 0);
+    set('flip_abandoned', 0);
+    //Best times
+    set('flip_casual', '-:-');
+    set('flip_medium', '-:-');
+    set('flip_hard', '-:-');
+    //Cards stats
+    set('flip_matched', 0);
+    set('flip_wrong', 0);
+  }
 
-$(function() {
+  // Fill stats
+  if( get('flip_won') > 0 || get('flip_lost') > 0 || get('flip_abandoned') > 0) {updateStats();}
 
-for (var y = 1; y < 3 ; y++) {
-	$.each(ImgSource, function(i, val) {
-		$(Source).append("<div id=card" + y + i + "><img src=" + val + " />");
-	});
-}
-	$(Source + " div").click(OpenCard);
-	ShuffleImages();
+  // Toggle start screen cards
+  $('.logo .card:not(".twist")').on('click', function(e){
+    $(this).toggleClass('active').siblings().not('.twist').removeClass('active');
+    if( $(e.target).is('.playnow') ) { $('.logo .card').last().addClass('active'); }
+  });
+
+  // Start game
+  $('.play').on('click', function(){
+    increase('flip_abandoned');
+		$('.info').fadeOut();
+
+    var difficulty = '',
+        timer      = 1000,
+        level      = $(this).data('level');
+
+    // Set game timer and difficulty   
+    if     (level ==  8) { difficulty = 'casual'; timer *= level * 4; }
+    else if(level == 18) { difficulty = 'medium'; timer *= level * 5; }
+    else if(level == 32) { difficulty = 'hard';   timer *= level * 6; }	    
+
+    $('#g').addClass(difficulty);
+
+    $('.logo').fadeOut(250, function(){
+      var startGame  = $.now(),
+          obj = [];
+
+      // Create and add shuffled cards to game
+      for(i = 0; i < level; i++) { obj.push(i); }
+
+      var shu      = shuffle( $.merge(obj, obj) ),
+          cardSize = 100/Math.sqrt(shu.length);
+
+      for(i = 0; i < shu.length; i++){
+        var code = shu[i];
+        if(code < 10) code = "0" + code;
+        if(code == 30) code = 10;
+        if(code == 31) code = 21;
+        $('<div class="card" style="width:'+cardSize+'%;height:'+cardSize+'%;">'+
+            '<div class="flipper"><div class="f"></div><div class="b" data-f="&#xf0'+code+';"></div></div>'+
+          '</div>').appendTo('#g');
+      }
+
+      // Set card actions
+      $('#g .card').on({
+        'mousedown' : function(){
+          if($('#g').attr('data-paused') == 1) {return;}
+          var data = $(this).addClass('active').find('.b').attr('data-f');
+
+          if( $('#g').find('.card.active').length > 1){
+            setTimeout(function(){
+              var thisCard = $('#g .active .b[data-f='+data+']');
+
+              if( thisCard.length > 1 ) {
+                thisCard.parents('.card').toggleClass('active card found').empty(); //yey
+                increase('flip_matched');
+
+                // Win game
+                if( !$('#g .card').length ){
+                  var time = $.now() - startGame;
+                  if( get('flip_'+difficulty) == '-:-' || get('flip_'+difficulty) > time ){
+                    set('flip_'+difficulty, time); // increase best score
+                  }
+
+                  startScreen('nice');
+                }
+              }
+              else {
+                $('#g .card.active').removeClass('active'); // fail
+                increase('flip_wrong');
+              }
+            }, 401);
+          }
+        }
+      });
+
+      // Add timer bar
+      $('<i class="timer"></i>')
+        .prependTo('#g')
+        .css({
+          'animation' : 'timer '+timer+'ms linear'
+        })
+        .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+          startScreen('fail'); // fail game
+        });
+
+      // Set keyboard (p)ause and [esc] actions
+      $(window).off().on('keyup', function(e){
+        // Pause game. (p)
+        if(e.keyCode == 80){
+          if( $('#g').attr('data-paused') == 1 ) { //was paused, now resume
+            $('#g').attr('data-paused', '0');
+            $('.timer').css('animation-play-state', 'running');
+            $('.pause').remove();
+          }
+          else {
+            $('#g').attr('data-paused', '1');
+            $('.timer').css('animation-play-state', 'paused');
+            $('<div class="pause"></div>').appendTo('body');
+          }
+        }
+        // Abandon game. (ESC)
+        if(e.keyCode == 27){
+          startScreen('flip');
+          // If game was paused
+          if( $('#g').attr('data-paused') == 1 ){
+            $('#g').attr('data-paused', '0');
+            $('.pause').remove();
+          }
+          $(window).off();
+        }
+      });
+    });
+  });
+  
 });
