@@ -1,21 +1,39 @@
 var flip1=""
-var card_state=[];
-card_state["js-flip-1"]=0;
-card_state["js-flip-2"]=0;
-card_state["js-flip-3"]=0;
-card_state["js-flip-4"]=0;
-card_state["js-flip-5"]=0;
-card_state["js-flip-6"]=0;
-card_state["js-flip-7"]=0;
-card_state["js-flip-8"]=0;
+
+
 
 $(function(){
 $('.flip').click(
 function(){
  // console.log($(this).attr('princess'))
   var this_card=$(this).attr('id')
-  $('#' + this_card + ' .card').toggleClass('flipped')
-  console.log(this_card)  
+  
+  if(flip1==""){
+    console.log("first card")
+    $('#' + this_card + ' .card').toggleClass('flipped')  
+    flip1=this_card
+    
+  }
+  else //assume for now we haven't reclicked a shown card
+  {
+      if($('#' +this_card).attr('princess') ==$('#' +flip1).attr('princess')){        
+        $('#' + this_card).removeClass('flip')  //simple way to stop re-clicking
+        $('#' + flip1).removeClass('flip')  //simple way to stop re-clicking
+        flip1=""        
+      }
+    else{
+      
+      $('#' + this_card + ' .card').toggleClass('flipped')        
+      
+    setTimeout(function(){      
+      $('.flip .card').removeClass('flipped') ;       
+      }, 1000);          
+      
+      
+      flip1=""
+    }
+  }
+  
 }
 )
 });
