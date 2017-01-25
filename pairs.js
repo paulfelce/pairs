@@ -10,29 +10,12 @@ card_state["js-flip-7"]=0;
 card_state["js-flip-8"]=0;
 
 $(function(){
-
 $('.flip').click(
 function(){
-  
+ // console.log($(this).attr('princess'))
   var this_card=$(this).attr('id')
-  
-  switch(card_state[this_card]){
-    case 0:      
-       $('#' + this_card + ' .card' ).addClass('flipped');
-    
-      if(flip1==this_card)
-      {
-        
-      }
-      
-      card_state[this_card]=1;
-      break;
-    case 1:
-        $('#' + this_card + ' .card' ).removeClass('flipped');
-        card_state[this_card]=0;
-      break;
-              }  
+  $('#' + this_card + ' .card').toggleClass('flipped')
+  console.log(this_card)  
 }
 )
-
 });
