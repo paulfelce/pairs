@@ -9,7 +9,9 @@ var card6_state = 0;
 var card7_state = 0;
 var card8_state = 0;
 
-
+$(function()
+ {
+alert('doc loaded');
 $('#js-flip-1').click(
 function(){
   alert('clicked');
@@ -146,3 +148,5 @@ function(){
               }  
 }
 )
+
+});
