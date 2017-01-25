@@ -9,6 +9,7 @@ card_state["js-flip-6"]=0;
 card_state["js-flip-7"]=0;
 card_state["js-flip-8"]=0;
 
+$(function(){
 
 $('.flip').click(
 function(){
@@ -33,3 +34,5 @@ function(){
               }  
 }
 )
+
+});
