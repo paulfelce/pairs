@@ -18,7 +18,6 @@ function(){
   switch(card1_state){
     case 0:
        $('#js-flip-1 .card').addClass('flipped');
-       $('#js-flip-1 .card').addClass('flipped');
         card1_state=1;
       break;
     case 1:
