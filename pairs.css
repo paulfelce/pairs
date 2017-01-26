@@ -2,11 +2,11 @@ body {
     background: #ccc;
   font-size:48pt;
 }
-img{height:200px}
+img{height:180px}
 .flip  {
     -webkit-perspective: 800;
     width: 400px;
-    height: 200px;
+    height: 180px;
     position: relative;
     margin: 50px auto;
 }
