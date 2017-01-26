@@ -1,13 +1,24 @@
 body {
     background: #ccc;
+  font-size:48pt;
 }
-.flip {
+img{height:200px}
+.flip  {
     -webkit-perspective: 800;
     width: 400px;
-    height: 400px;
+    height: 200px;
     position: relative;
     margin: 50px auto;
 }
+td{
+      -webkit-perspective: 800;
+    width: 400px;    
+    position: relative;
+    margin: 50px auto;
+  background:#fff;
+
+}
+
 .flip .card.flipped {
     -webkit-transform: rotatex(-180deg);
 }
