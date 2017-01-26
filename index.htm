@@ -1,17 +1,8 @@
-<!-- based on code found at http://codepen.io/johnmotyljr/pen/tkipE-->
-<HTML>
-<HEAD>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
-  <script src="pairs.js"></script>
-<link rel="stylesheet" href="pairs.css"></link>
-	</head>
-<body>
-<table>
+<table id="pairs_table">
   <tr>
     <td id="js-flip-1" class="flip" princess="cinderella">
     <div class="card">
-        <div class="face front">?</div>
+        <div class="face front" id="t">?</div>
         <div class="face back"><img src="https://paulfelce.github.io/pairs/cinderella.PNG"/></div>
     
 </div></td>
@@ -70,5 +61,6 @@ id="js-flip-5" class="flip" princess="belle">
   </tr>
 
 </table>
-</body>
-</html>
+<div id="finished" style="display:none">
+  Well done, you found all the pairs. Your next clue is hidden under batman.
+</div>
