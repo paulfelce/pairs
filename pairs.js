@@ -8,7 +8,7 @@ $('.flip').click(
 function(){
   handle_flip();
   
- );
+});
 
   
 //refactored so we can cleanly add a test and not run this code on already paired cards.
