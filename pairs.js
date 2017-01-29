@@ -49,4 +49,4 @@ function handle_flip()
       }
   }
  }
-
+});
