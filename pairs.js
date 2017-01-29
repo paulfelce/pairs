@@ -28,7 +28,7 @@ function handle_flip()
       if(this_card!=flip1 && $('#' +this_card).attr('princess') ==$('#' +flip1).attr('princess'))
       {          //match    
           $('#' + flip1).removeClass('flip')  //simple way to stop re-clicking      
-          $('#' + flip1).attr('paired') = 'true'      
+         // $('#' + flip1).attr('paired') = 'true'      
           $('#' + this_card).find(".face.front").hide(); //hide the face front
           $('#' + flip1).find(".face.front").hide(); //hide the face front
           flip1=""
