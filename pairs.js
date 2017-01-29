@@ -66,6 +66,4 @@ function handle_flip()
   }
   
 }
-)
-}
 }
