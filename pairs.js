@@ -6,11 +6,19 @@ $(function(){
   
 $('.flip').click(
 function(){
- // console.log($(this).attr('princess'))
+  handle_flip();
+  
+ );
+
+  
+//refactored so we can cleanly add a test and not run this code on already paired cards.
+function handle_flip()
+{
+  // console.log($(this).attr('princess'))
   var this_card=$(this).attr('id')
   
   if(flip1==""){
-    console.log("first card")
+    
     $('#' + this_card + ' .card').toggleClass('flipped')  
     flip1=this_card
     
@@ -19,8 +27,13 @@ function(){
   {
       //need to compare this_card to flip1 to check not clicking same card twice
       if(this_card!=flip1 && $('#' +this_card).attr('princess') ==$('#' +flip1).attr('princess')){          //match    
-        $('#' + this_card).removeClass('flip')  //simple way to stop re-clicking
+        //$('#' + this_card).removeClass('flip')  //simple way to stop re-clicking
+        
+        
         $('#' + flip1).removeClass('flip')  //simple way to stop re-clicking      
+        
+        $('#' + flip1).attr('paired') = 'true'
+        //$('#' + this_card).attr('paired') = 'true'
         
         $('#' + this_card).find(".face.front").hide(); //hide the face front
         $('#' + flip1).find(".face.front").hide(); //hide the face front
@@ -54,4 +67,5 @@ function(){
   
 }
 )
-});
+}
+}
