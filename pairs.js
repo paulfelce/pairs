@@ -1,14 +1,21 @@
-/* Version 1 */
+/* Version 2 */
 var flip1=""
 var pairs=0;
+var allow_click = true; //clicking too fast messes up the logic
 
 $(function(){
   
 assign_cards(); 
  
 $('td').click(function(){
-  if(!card_already_flipped(this))
-  handle_click($(this));
+  if(allow_click)
+  {
+    if(!card_already_flipped(this))
+    {
+      allow_click = false;
+      handle_click($(this));
+    }  
+  }
 })
   
 });
@@ -69,6 +76,7 @@ function handle_click(card){
   if(flip1=="")
     {
       flip1=this_card;
+      allow_click=true;
     }
   else  //2nd card so look for match
   {
@@ -77,6 +85,7 @@ function handle_click(card){
        pairs++;
        flip1=""
        $('#pairsfound').html('Pairs found:' + pairs);
+       allow_click=true;
        if(pairs==6){
          $('#pairs_table').hide();
          $('#finished').show();
@@ -88,6 +97,7 @@ function handle_click(card){
         $(this_card + ' .card').removeClass('flipped')   
         $(flip1 + ' .card').removeClass('flipped') 
         flip1="";
+        allow_click=true;
         },800);
           
       }//no match
