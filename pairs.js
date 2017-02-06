@@ -32,8 +32,8 @@ function assign_cards(){
   $('#js-flip-1').attr('princess','pirate.png');
   $('#img1').attr('src','pirate.png');
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-2').attr('princess','pirate_ship.jpg');
+  $('#img2').attr('src',$('#js-flip-2').attr('princess'));
   
   $('#js-flip-1').attr('princess','pirate.png');
   $('#img1').attr('src','pirate.png');
