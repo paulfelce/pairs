@@ -30,28 +30,41 @@ function card_already_flipped(obj){
 //Ultimately want it to randomise
 function assign_cards(){
   $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#img1').attr('src',$('#js-flip-1').attr('princess'));
   
   $('#js-flip-2').attr('princess','pirate_ship.jpg');
   $('#img2').attr('src',$('#js-flip-2').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-3').attr('princess','plane.jpg');
+  $('#img3').attr('src',$('#js-flip-3').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-4').attr('princess','tie.jpg');
+  $('#img4').attr('src',$('#js-flip-4').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-5').attr('princess','tomato.jpg');
+  $('#img5').attr('src',$('#js-flip-5').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-6').attr('princess','super_mario.jpg');
+  $('#img6').attr('src',$('#js-flip-6').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-7').attr('princess','super_mario.jpg');
+  $('#img7').attr('src',$('#js-flip-7').attr('princess'));
   
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src','pirate.png');
+  $('#js-flip-8').attr('princess','tomato.jpg');
+  $('#img8').attr('src',$('#js-flip-8').attr('princess'));
+  
+  $('#js-flip-9').attr('princess','tie.jpg');
+  $('#img9').attr('src',$('#js-flip-9').attr('princess'));
+  
+  $('#js-flip-10').attr('princess','plane.jpg');
+  $('#img10').attr('src',$('#js-flip-10').attr('princess'));
+  
+  $('#js-flip-11').attr('princess','pirate_ship.jpg');
+  $('#img1').attr('src',$('#js-flip-11').attr('princess'));
+  
+  $('#js-flip-12').attr('princess','pirate.png');
+  $('#img12').attr('src',$('#js-flip-12').attr('princess'));
+  
   
 }
 
