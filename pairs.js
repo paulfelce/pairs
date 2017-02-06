@@ -75,7 +75,7 @@ function handle_click(card){
      {
        pairs++;
        flip1=""
-       console.log(pairs)
+       $('#pairsfound').html('Pairs found:' + pairs);
        if(pairs==6){
          $('#pairs_table').hide();
          $('#finished').show();
