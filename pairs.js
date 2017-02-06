@@ -41,9 +41,10 @@ function assign_cards(){
   for(var i=0;i<12;i++)
   {
     console.log(shuffled[i]);
-    console.log('#js-flip-' + i+1);
-    $('#js-flip-' + i+1).attr('princess',shuffled[i]);  
-    $('#img'+i+1).attr('src',$('#js-flip-'+i+1).attr('princess'));
+    j=i+1;//don't attempt to concatenate and perform arithmetic!
+    console.log('#js-flip-' + j);
+    $('#js-flip-' + j).attr('princess',shuffled[i]);  
+    $('#img'+j).attr('src',$('#js-flip-'+j).attr('princess'));
   }
     
 }
