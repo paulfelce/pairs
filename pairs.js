@@ -40,6 +40,7 @@ function assign_cards(){
   
   for(var i=0;i<12;i++)
   {
+    console.log(shuffled[i]);
     $('#js-flip-' + i+1).attr('princess',shuffled[i]);  
     $('#img'+i+1).attr('src',$('#js-flip-'+i+1).attr('princess'));
   }
