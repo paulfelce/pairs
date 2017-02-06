@@ -1,6 +1,6 @@
+/* Version 1 */
 var flip1=""
 var pairs=0;
-var test=7;
 
 $(function(){
   
@@ -40,9 +40,7 @@ function assign_cards(){
   
   for(var i=0;i<12;i++)
   {
-    console.log(shuffled[i]);
     j=i+1;//don't attempt to concatenate and perform arithmetic!
-    console.log('#js-flip-' + j);
     $('#js-flip-' + j).attr('princess',shuffled[i]);  
     $('#img'+j).attr('src',$('#js-flip-'+j).attr('princess'));
   }
