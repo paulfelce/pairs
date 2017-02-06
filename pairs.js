@@ -29,7 +29,7 @@ function card_already_flipped(obj){
 //change this to reorganise the cards.
 //Ultimately want it to randomise
 function assign_cards(){
-  var images=["pirate.png","pirate_ship.jpg","tomato.jpg","plane.jpg","tie.jpg","super_mario.jpg","pirate.png","pirate_ship.jpg"]
+  var images=["pirate.png","pirate_ship.jpg","tomato.jpg","plane.jpg","tie.jpg","super_mario.jpg"]
 
    //duplicate images (so we have pairs of cards
   for(var i=0;i<=5;i++){
