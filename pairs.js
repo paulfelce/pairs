@@ -60,7 +60,7 @@ function assign_cards(){
   $('#img10').attr('src',$('#js-flip-10').attr('princess'));
   
   $('#js-flip-11').attr('princess','pirate_ship.jpg');
-  $('#img1').attr('src',$('#js-flip-11').attr('princess'));
+  $('#img11').attr('src',$('#js-flip-11').attr('princess'));
   
   $('#js-flip-12').attr('princess','pirate.png');
   $('#img12').attr('src',$('#js-flip-12').attr('princess'));
