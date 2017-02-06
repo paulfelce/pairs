@@ -29,44 +29,37 @@ function card_already_flipped(obj){
 //change this to reorganise the cards.
 //Ultimately want it to randomise
 function assign_cards(){
-  $('#js-flip-1').attr('princess','pirate.png');
-  $('#img1').attr('src',$('#js-flip-1').attr('princess'));
+  var images=["pirate.png","pirate_ship.jpg","tomato.jpg","plane.jpg","tie.jpg","super-mario.jpg","pirate.png","pirate_ship.jpg","tomato.jpg","plane.jpg","tie.jpg","super-mario.jpg"]
+
+   //duplicate images (so we have pairs of cards
+  for(var i=0;i<=5;i++){
+    images.push(images[i])  
+  }
   
-  $('#js-flip-2').attr('princess','pirate_ship.jpg');
-  $('#img2').attr('src',$('#js-flip-2').attr('princess'));
+  var shuffled = shuffle(images);
   
-  $('#js-flip-3').attr('princess','plane.jpg');
-  $('#img3').attr('src',$('#js-flip-3').attr('princess'));
-  
-  $('#js-flip-4').attr('princess','tie.jpg');
-  $('#img4').attr('src',$('#js-flip-4').attr('princess'));
-  
-  $('#js-flip-5').attr('princess','tomato.jpg');
-  $('#img5').attr('src',$('#js-flip-5').attr('princess'));
-  
-  $('#js-flip-6').attr('princess','super_mario.jpg');
-  $('#img6').attr('src',$('#js-flip-6').attr('princess'));
-  
-  $('#js-flip-7').attr('princess','super_mario.jpg');
-  $('#img7').attr('src',$('#js-flip-7').attr('princess'));
-  
-  $('#js-flip-8').attr('princess','tomato.jpg');
-  $('#img8').attr('src',$('#js-flip-8').attr('princess'));
-  
-  $('#js-flip-9').attr('princess','tie.jpg');
-  $('#img9').attr('src',$('#js-flip-9').attr('princess'));
-  
-  $('#js-flip-10').attr('princess','plane.jpg');
-  $('#img10').attr('src',$('#js-flip-10').attr('princess'));
-  
-  $('#js-flip-11').attr('princess','pirate_ship.jpg');
-  $('#img11').attr('src',$('#js-flip-11').attr('princess'));
-  
-  $('#js-flip-12').attr('princess','pirate.png');
-  $('#img12').attr('src',$('#js-flip-12').attr('princess'));
-  
-  
+  for(var i=0;i<12;i++)
+  {
+    $('#js-flip-' + i+1).attr('princess',shuffled[i]);  
+    $('#img'+i+1).attr('src',$('#js-flip-'+i+1).attr('princess'));
+  }
+    
 }
+
+
+/* thanks to http://stackoverflow.com/questions/962802/is-it-correct-to-use-javascript-array-sort-method-for-shuffling */
+function shuffle(array) {
+    var tmp, current, top = array.length;
+
+    if(top) while(--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = array[current];
+        array[current] = array[top];
+        array[top] = tmp;
+    }
+
+    return array;
+} 
 
 
 function handle_click(card){
